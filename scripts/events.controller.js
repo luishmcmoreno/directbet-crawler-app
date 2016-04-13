@@ -40,9 +40,12 @@
 			vm.options = {scaleBeginAtZero: true};
 			for (var o in vm.currentEvent.odds) {
 				var bet = vm.currentEvent.odds[o];
-				if (bet.type === vm.type && bet.bet === vm.bet) {
-					labels.push((new Date(bet.timestamp)).toLocaleTimeString());
-					values[0].push(bet.odd);
+				if (bet.type.trim() === vm.type.trim() && bet.bet.trim() === vm.bet.trim()) {
+					console.log(bet);
+					if (bet.odd !== values[0][values[0].length - 1]) {
+						labels.push((new Date(bet.timestamp)).toLocaleTimeString());
+						values[0].push(bet.odd);
+					}
 				}
 			}
 			vm.values = values;
