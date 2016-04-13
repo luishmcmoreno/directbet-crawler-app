@@ -15,7 +15,7 @@
 		vm.selectBet = selectBet;
 		vm.selectType = selectType;
 		vm.addEvent = addEvent;
-		
+
 		activate();
 
 		////////////////
@@ -24,7 +24,7 @@
 			EventsService.addEvent(vm.idEvent).then(function () {
 				EventsService.getEvents().then(function (events) {
 					vm.events = events;
-				});				
+				});
 			});
 		}
 
@@ -36,7 +36,7 @@
 		function selectBet() {
 			var values = [[]];
 			var labels = [];
-			vm.series = ['Oi'];
+			vm.series = ['Evolução dos odds'];
 			for (var o in vm.currentEvent.odds) {
 				var bet = vm.currentEvent.odds[o];
 				if (bet.type === vm.type && bet.bet === vm.bet) {
