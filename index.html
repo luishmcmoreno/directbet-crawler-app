@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DirectBet Crawler Chart</title>
+	<style>
+		.wrapper {
+			max-width: 960px;
+			margin: 0 auto;
+		}
+
+		div {
+			margin-bottom: 20px;
+		}
+	</style>
+</head>
+
+
+<body ng-app="DirectBetCrawllerChart">
+	<div ng-controller="EventsController as app" class="wrapper">
+		<div ng-repeat="event in app.events">
+			<button ng-click="app.getEvent(event.id)">
+				{{ event.title }}
+			</button>
+		</div>
+		<div ng-show="app.loading">
+			Carregando ...
+		</div>
+		<div ng-show="!app.loading && app.types">
+			<label>
+				Selecione o tipo da aposta:
+				<select ng-change="selectType(app.type)" ng-model="app.type">
+					<option value="{{ key }}" ng-repeat="(key, types) in app.types"> {{ key }}</option>
+				</select>
+			</label>
+		</div>
+		<div ng-show="!app.loading && app.type">
+			<label>
+				Selecione a aposta:
+				<select ng-change="app.selectBet(app.bet)" ng-model="app.bet">
+					<option value="{{ key }}" ng-repeat="(key, betObj) in app.types[app.type]"> {{ key }}</option>
+				</select>
+			</label>
+		</div>
+		<div ng-if="!app.loading && app.values && app.labels">
+			<canvas 
+				id="line" 
+				class="chart chart-line" 
+				chart-data="app.values"
+			 	chart-labels="app.labels"
+			 	chart-series="app.series"
+			 	chart-legend="true">
+			</canvas> 
+		</div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.10/angular.js"></script>
+	<script src="https://cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>
+	<script src="scripts/app.js"></script>
+	<script src="scripts/events.service.js"></script>
+	<script src="scripts/events.controller.js"></script>
+</body>
+</html>
