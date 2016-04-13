@@ -18,6 +18,13 @@
 
 <body ng-app="DirectBetCrawllerChart">
 	<div ng-controller="EventsController as app" class="wrapper">
+		<div>
+			<label>
+				Adicionar Evento:
+				<input type="text" placeholder="ID do Evento" ng-model="app.idEvent">
+				<button ng-click="app.addEvent()" ng-disabled="!app.idEvent">Adicionar</button>
+			</label>
+		</div>
 		<div ng-repeat="event in app.events">
 			<button ng-click="app.getEvent(event.id)">
 				{{ event.title }}

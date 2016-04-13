@@ -14,10 +14,19 @@
 		vm.getEvent = getEvent;
 		vm.selectBet = selectBet;
 		vm.selectType = selectType;
-
+		vm.addEvent = addEvent;
+		
 		activate();
 
 		////////////////
+
+		function addEvent() {
+			EventsService.addEvent(vm.idEvent).then(function () {
+				EventsService.getEvents().then(function (events) {
+					vm.events = events;
+				});				
+			});
+		}
 
 		function selectType() {
 			vm.values = [];

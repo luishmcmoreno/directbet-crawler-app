@@ -10,11 +10,12 @@
 	/* @ngInject */
 	function EventsService($http, $q) {
 
-		var API_URL = 'http://localhost:3000';
+		var API_URL = 'http://45.55.153.158:3000';
 
 		var service = {
 			getEvents: getEvents,
 			getEvent: getEvent,
+			addEvent: addEvent,
 			updateEvent: updateEvent
 		};
 
@@ -25,6 +26,16 @@
 		function getEvents() {
 			var defer = $q.defer();
 			$http.get(API_URL + '/events').success(function (data) {
+				defer.resolve(data);
+			}).catch(function (err) {
+				defer.reject(err);
+			});
+			return defer.promise;
+		}
+
+		function addEvent(id) {
+			var defer = $q.defer();
+			$http.post(API_URL + '/events/' + id).success(function (data) {
 				defer.resolve(data);
 			}).catch(function (err) {
 				defer.reject(err);
