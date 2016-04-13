@@ -37,6 +37,7 @@
 			var values = [[]];
 			var labels = [];
 			vm.series = ['Evolução dos odds'];
+			vm.options = {scaleBeginAtZero: true};
 			for (var o in vm.currentEvent.odds) {
 				var bet = vm.currentEvent.odds[o];
 				if (bet.type === vm.type && bet.bet === vm.bet) {
